@@ -1,102 +1,57 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/-cPJVYMd)
-Django ORM Standalone
-=====================
+Assignment 3 — Django Frameworks & Energy Efficiency
+Course: Software Architecture (SOFE 3650U)
+Group 10 — CRN 43510
+Author: Kenneth Nnah
+Overview
+This project demonstrates how to use the Django ORM framework to implement a Cash Register Application that:
+1. Populates a database with product UPC codes, names, and prices.
+2. Allows users to scan or enter a UPC via a web interface (and console) to display the product name and price.
+The app also includes Django’s admin panel for product management and uses SQLite as its backend database.
 
-![Django](https://img.shields.io/badge/Django_ORM-Standalone-blue)
-![Python](https://img.shields.io/badge/Python-yellow)
+Features
+•	• Django ORM Integration — Use Django’s models and migrations without a full web server setup.
+•	• Cash Register UI — Input UPC and instantly get product info.
+•	• Fixture Loading — Populate the database from a simple products.json file.
+•	• Admin Panel Access — View and edit products in a graphical interface.
+•	• Web & Console Versions — Run from the terminal or via a local web browser.
+Project Structure
 
-Use the database components of Django without having to use the rest of Django (i.e. running a web server)! :tada: A typical use case for using this template would be if you are writing a python script and you would like the database functionality provided by Django, but have no need for the request/response functionalty of a client/server web application that Django also provides. 
-
-With this project template you can write regular python scripts and use Django's excellent ORM functionality with the database backend of your choice. This makes it convienient for Djangonauts to write database driven python applications with the familiar and well polished Django ORM. Enjoy.
-
-:gear: Requirements
--------------------
-- Last tested successfully with Python 3.10.4 and Django 5.0.6
-- Create venv and pip install django to import the required modules.
-
-:open_file_folder: File Structure
----------------------------------
-```
-django-orm/
+assignment-3-django-and-energy-group-10-crn-43510/
 ├── db/
-│   ├── __init__.py
-│   └── models.py
+│   ├── models.py            # Product model (UPC, name, price)
+│   ├── forms.py             # ScanForm for UPC input
+│   ├── views.py             # scan_view (renders scan.html)
+│   └── fixtures/products.json
+├── templates/scan.html
 ├── main.py
 ├── manage.py
-├── README.md
-└── settings.py
-```
+├── settings.py
+├── urls.py
+└── README.md
 
-__The main.py file is the entry point for the project, and where you start your code. You automatically get access to your models via ```from db.models import *```
-Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__ :smiling_face_with_three_hearts:
+How to Run (Windows Instructions)
+1.	Clone the repository: git clone https://github.com/OTUSOFE365025/assignment-3-django-and-energy-group-10-crn-43510.git
+2.	Create and activate a virtual environment: python -m venv venv && venv\Scripts\activate
+3.	Install Django: pip install django
+4.	Apply migrations: python manage.py makemigrations && python manage.py migrate
+5.	Load product fixtures: python manage.py loaddata products
+Running the Application
+Option A — Console Version: Run python main.py and scan UPCs directly in the terminal.
+Option B — Web Version: Run python manage.py runserver and visit http://127.0.0.1:8000/ in a browser.
+Energy Efficiency Scenario (Q2)
 
-__The db/models.py is where you configure your typical Django models.__ There is a toy user model included as a simple example. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM. 
+System: Smartphone health-monitoring app
+Stimulus: The app collects sensor data efficiently without draining the battery.
+Response: Adjusts sampling and processing frequency dynamically based on user activity.
+Response Measure: Battery consumption reduced by 25% compared to constant sampling mode.
 
-:rocket: Quick Setup
---------------------
-Create a folder for your project on your local machine
-```
-mkdir myproject; cd myproject
-```
-Create a virtual environment and install django
-```
-python -m venv venv; source venv/bin/activate; pip install django
-```
-Download this project template from GitHub
-```
-git clone git@github.com:dancaron/Django-ORM.git; cd Django-ORM
-```
-Initialize the database
-```
-python manage.py makemigrations db; python manage.py migrate
-```
-Run the project
-```
-python main.py
-```
-
-Feel free to send pull requests if you want to improve this project.
-
-:crystal_ball: Example
-----------------------
-After running Quick Start above: 
-
-Code in db/models.py:
-```
-# Sample User model
-class User(models.Model):
-    name = models.CharField(max_length=50, default='Dan')
-
-    def __str__(self):
-        return self.name
-```
-Code in main.py:
-```
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
-
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
-```
-Output from command: ```python main.py```
-```
-ID: 1	Username: Dan
-ID: 2	Username: Robert
-```
-
-:mortar_board: Django Models
-----------------------------
-
-Link: [How to Use Django Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
-
+•	Architectural Tactics:
+•	1. Adaptive Sampling — Adjust data collection based on user context (e.g., slower sampling when idle).
+•	2. Batching Work — Combine multiple updates and process together to reduce frequent CPU/network usage.
+Technologies Used
+•	Python 3.13.7
+•	Django 5.2.8
+•	SQLite3 Database
+•	HTML/CSS for UI
 License
--------
-
-The MIT License (MIT) Copyright (c) 2024 Dan Caron
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Based on Dan Caron’s Django ORM Template (MIT License). Modified for educational purposes at Ontario Tech University, 2025.

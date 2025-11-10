@@ -1,32 +1,36 @@
 ############################################################################
 ## Django ORM Standalone Python Template
 ############################################################################
-""" Here we'll import the parts of Django we need. It's recommended to leave
-these settings as is, and skip to START OF APPLICATION section below """
-
-# Turn off bytecode generation
 import sys
 sys.dont_write_bytecode = True
 
-# Import settings
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 
-# setup django environment
 import django
 django.setup()
 
-# Import your models for use in your script
-from db.models import *
+from db.models import Product   # ✅ Import your Product model
 
 ############################################################################
 ## START OF APPLICATION
 ############################################################################
 """ Replace the code below with your own """
 
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
+# Show all products loaded from fixtures
+print("=== Available Products ===")
+for p in Product.objects.all():
+    print(f"{p.upc} — {p.name} — ${p.price}")
 
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
+# Simple scan loop
+while True:
+    upc = input("\nEnter product UPC (or 'q' to quit): ").strip()
+    if upc.lower() == 'q':
+        print("Exiting Cash Register.")
+        break
+
+    try:
+        product = Product.objects.get(upc=upc)
+        print(f"✅ Product Found: {product.name} — ${product.price}")
+    except Product.DoesNotExist:
+        print("❌ Product not found. Try again.")

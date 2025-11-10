@@ -1,0 +1,5 @@
+[
+  {"model": "db.product", "pk": 1, "fields": {"upc": "123456789012", "name": "Milk 2L", "price": "4.49"}},
+  {"model": "db.product", "pk": 2, "fields": {"upc": "987654321098", "name": "Bread", "price": "2.99"}},
+  {"model": "db.product", "pk": 3, "fields": {"upc": "555555555555", "name": "Eggs (12)", "price": "5.49"}}
+]
